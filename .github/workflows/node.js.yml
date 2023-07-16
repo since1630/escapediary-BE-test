@@ -65,5 +65,5 @@ jobs:
           --application-name cicd-test3-hangju
           --deployment-config-name CodeDeployDefault.OneAtATime
           --deployment-group-name cicd-test3-hangju-group
-          --s3-location bucket=cicd-test3-s3,bundleType=zip,key=deploy/hous.zip
+          --s3-location bucket=cicd-test3-s3,bundleType=zip,key=deploy/cicd.zip
 # ... (rest of your workflow file)
