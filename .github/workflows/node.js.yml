@@ -1,0 +1,69 @@
+# ... (other parts of your workflow file)
+name: Node.js CI
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: ['18.x']
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - run: npm ci
+      #     - run: npm run build --if-present
+      #     - run: npm test
+
+      # - name: create env file
+      #   working-directory: ./
+      #   run: |
+      #     pwd
+      #     touch .env
+      #     echo PORT=${{ secrets.PORT }} >> .env
+      #     echo MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env
+      #     echo JWT_SECRET=${{ secrets.JWT_SECRET }} >> .env
+      #     echo JWT_ALGO=${{ secrets.JWT_ALGO }} >> .env
+      #     cat .env
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+      ###
+      - name: zip file
+        run: zip -r cicd.zip ./app.js ./config ./migrations ./models ./routes ./scripts ./appspec.yml ./package.json ./package-lock.json
+
+      # ./dist ./scripts ./appspec.yml ./package.json
+      # - name: Set environment variables for AWS credentials
+      #   run: |
+      #     echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
+      #     echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
+
+      - name: Upload to S3
+        run: aws s3 cp --region ap-northeast-2 ./cicd.zip s3://cicd-test3-s3/deploy/
+        env:
+          S3_BUCKET_NAME: be-0-name
+
+      - name: deploy with AWS codeDeploy
+        run: aws deploy create-deployment
+          --application-name cicd-test3-hangju
+          --deployment-config-name CodeDeployDefault.OneAtATime
+          --deployment-group-name cicd-test3-hangju-group
+          --s3-location bucket=cicd-test3-s3,bundleType=zip,key=deploy/hous.zip
+# ... (rest of your workflow file)
