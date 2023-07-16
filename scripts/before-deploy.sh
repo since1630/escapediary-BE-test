@@ -1,5 +1,4 @@
-REPOSITORY=/home/ubuntu/escapediary-BE-test
+REPOSITORY=/home/ubuntu
 cd $REPOSITORY
 
-# pm2 delete 0  #! 대체 이건 왜 안되는 거지??
-pm2 restart all
+pm2 delete 0  #! 대체 이건 왜 안되는 거지??
