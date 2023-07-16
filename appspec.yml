@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ubuntu/meetescaper-BE
+    destination: /home/ubuntu/escapediary-BE-test
     overwrite: yes
 file_exists_behavior: OVERWRITE #  많이들 하는 방식인 "appspec.yml에서 beforeInstall 과정에서 수행할 스크립트를 추가한다. (이미 존재하고 있는 파일 삭제 후 진행) " 대신 overwrite사용
 
