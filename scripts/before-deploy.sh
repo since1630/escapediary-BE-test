@@ -1,4 +1,4 @@
-REPOSITORY=/home/ubuntu/escapediary-BE-test
-cd $REPOSITORY
+# REPOSITORY=/home/ubuntu/escapediary-BE-test
+# cd $REPOSITORY
 
-pm2 delete 0
+# pm2 delete 0
