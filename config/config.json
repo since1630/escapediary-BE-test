@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": "4321aaaa",
-    "database": "escapediary",
-    "host": "express-database.cncayjm3edkr.ap-northeast-2.rds.amazonaws.com",
+    "username": "obligedwalnut",
+    "password": "303030aa",
+    "database": "EscapeDiary",
+    "host": "express-database.c2uflxyobxhu.ap-northeast-2.rds.amazonaws.com",
     "dialect": "mysql"
   },
   "test": {
