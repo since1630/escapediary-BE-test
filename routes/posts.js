@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const { Posts } = require('../models');
+const verifyToken = require("../middlewares/auth_middleware")
 
+// 게시글 전체 조회
 router.get('/', async (req, res) => {
   try {
     const posts = await Posts.findAll();
@@ -15,8 +17,10 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
-  const { title, content, star } = req.body;
+// 게시글 작성
+router.post('/posts', verifyToken, async (req, res) => {
+  const { title, content, roomname, star } = req.body;
+  const {userId} = res.locals.user
   try {
     //! FE 내용중 하나라도 빠져있으면 에러 메시지 반환
     if (!star) {
@@ -36,7 +40,7 @@ router.post('/', async (req, res) => {
         .status(412)
         .json({ errorMessage: '게시글 내용의 형식이 일치하지 않습니다.' });
     }
-    await Posts.create({ title, content, star });
+    await Posts.create({ UserId:userId, title, content, roomname, star });
     return res.status(201).json({ message: '게시글 작성에 성공하였습니다' });
   } catch (error) {
     console.log(error);

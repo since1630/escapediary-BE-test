@@ -8,30 +8,31 @@ module.exports = {
         autoIncrement: true, // AUTO_INCREMENT
         primaryKey: true, // Primary Key (기본키)
         type: Sequelize.INTEGER
+      },
+      UserId: {
+        allowNull: false, // NOT NULL
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users', // Users 모델을 참조합니다. 
+          key: 'userId', // Users 모델의 userId를 참조합니다. 
+        }, 
+        onDelete: 'CASCADE', // 만약 Users 모델의 userId가 삭제되면, Posts 모델의 데이터가 삭제됩니다.
       },      
       title: {
         allowNull: false, // NOT NULL
         type: Sequelize.STRING,
       },
       roomname:{
-        allowNull:true,
-        type: Sequelize.STRING,
-      }, 
-      location:{
-        allowNull:true,
-        type: Sequelize.STRING,
-      },
-       price:{
-        allowNull:true,
-        type: Sequelize.INTEGER,
+        allowNull: false,
+        type: Sequelize.STRING
       },
       content: {
         allowNull: false, // NOT NULL
         type: Sequelize.STRING
       },
-       star:{
-        allowNull:false,
-        type: Sequelize.INTEGER,
+      star:{
+        allowNull: false,
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false, // NOT NULL

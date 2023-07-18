@@ -2,7 +2,7 @@
   "development": {
     "username": "obligedwalnut",
     "password": "303030aa",
-    "database": "EscapeDiary",
+    "database": "EscapeDiary-TEST",
     "host": "express-database.c2uflxyobxhu.ap-northeast-2.rds.amazonaws.com",
     "dialect": "mysql"
   },
