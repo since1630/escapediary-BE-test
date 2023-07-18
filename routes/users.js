@@ -49,7 +49,8 @@ router.post("/signup", async (req, res) => {
     }
 
     // id 유니크
-    const existUser = await Users.findOne({ id });
+    const existUser = await Users.findOne({where:{ id }});
+    console.log(existUser)
     if (existUser) {
       return res.status(412).json({ message: "중복된 id 입니다." });
     }
@@ -109,8 +110,6 @@ router.get("/", verifyToken, (req, res) => {
       .json({ message: "유저 정보를 불러오지 못했습니다." });
   }
 });
-
-// 수정
-// 삭제
+ 
 
 module.exports = router;
