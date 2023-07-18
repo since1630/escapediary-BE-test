@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
 });
 
 // 게시글 작성
-router.post('/posts', verifyToken, async (req, res) => {
+router.post('/', verifyToken, async (req, res) => {
   const { title, content, roomname, star } = req.body;
   const {userId} = res.locals.user
   try {

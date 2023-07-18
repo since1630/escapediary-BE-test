@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 router.use('/', users);
-router.use('/', posts);
+router.use('/posts', posts);
 
 
 module.exports = router;
