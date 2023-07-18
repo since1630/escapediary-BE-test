@@ -102,7 +102,7 @@ router.post("/login", async (req, res) => {
 router.get("/", verifyToken, (req, res) => {
   try {
     const user = res.locals.user;
-    return res.status(200).json({ data: user.id });
+    return res.status(200).json({ data: {id : user.id} });
   } catch (error) {
     console.log(error);
     return res
