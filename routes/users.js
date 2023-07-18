@@ -1,7 +1,8 @@
-const express = require("express")
+const express = require("express");
 const router = express.Router();
 const { Users } = require("../models");
 const jwt = require("jsonwebtoken");
+const verifyToken = require("../middlewares/auth_middleware");
 
 // 회원가입
 router.post("/signup", async (req, res) => {
@@ -93,6 +94,19 @@ router.post("/login", async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(400).json({ message: "로그인에 실패하였습니다." });
+  }
+});
+
+// user 정보 받는 라우터 하나(verify 쓰고)
+router.get("/", verifyToken, (req, res) => {
+  try {
+    const user = res.locals.user;
+    return res.status(200).json({ data: user.id });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(400)
+      .json({ message: "유저 정보를 불러오지 못했습니다." });
   }
 });
 

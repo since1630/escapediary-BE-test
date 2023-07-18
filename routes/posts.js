@@ -41,6 +41,7 @@ router.post('/', verifyToken, async (req, res) => {
         .json({ errorMessage: '게시글 내용의 형식이 일치하지 않습니다.' });
     }
     await Posts.create({ UserId:userId, title, content, roomname, star });
+    console.log(req.cookies)
     return res.status(201).json({ message: '게시글 작성에 성공하였습니다' });
   } catch (error) {
     console.log(error);
