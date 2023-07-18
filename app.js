@@ -18,7 +18,7 @@ app.use(
   cors({
     origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    credentials: false,
+    credentials: true,
   })
 );
 app.use('/api', routes);

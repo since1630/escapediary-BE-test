@@ -4,10 +4,11 @@ const {Users} = require("../models");
 
 // 사용자 인증 미들웨어
 const verifyToken = async (req, res, next) => {
+  // console.log(req.cookies)
   const { Authorization } = req.cookies;
   console.log(Authorization)
   const [authType, authToken] = (Authorization ?? "").split(" ");
-  console.log(authType)
+  // console.log(authType)
   console.log(authToken)
     if (!authToken || authType !== "Bearer") {
     res.status(401).send({
