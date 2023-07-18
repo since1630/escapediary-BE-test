@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const {Users} = require("../models");
 
+
 // 사용자 인증 미들웨어
 const verifyToken = async (req, res, next) => {
   const { Authorization } = req.cookies;

@@ -4,7 +4,8 @@ const users = require('./users')
 const router = express.Router();
 
 
+router.use('/', users);
 router.use('/', posts);
-router.use('/', users)
+
 
 module.exports = router;
