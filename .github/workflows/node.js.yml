@@ -47,7 +47,7 @@ jobs:
           aws-region: ap-northeast-2
       ###
       - name: zip file
-        run: zip -r cicd.zip ./app.js ./config ./migrations ./models ./routes ./scripts ./appspec.yml ./package.json ./package-lock.json
+        run: zip -r cicd.zip ./
 
       # ./dist ./scripts ./appspec.yml ./package.json
       # - name: Set environment variables for AWS credentials
